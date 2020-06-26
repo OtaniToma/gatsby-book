@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
+import SEO from '../components/seo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
 
@@ -19,8 +20,8 @@ export const query = graphql`
 
 export default ({ data }) => (
   <Layout >
-    <>
-      <div className="eyecatch">
+    <SEO />
+    <div className="eyecatch">
         <figure>
           <Img
             fluid={data.about.childImageSharp.fluid}
@@ -28,7 +29,7 @@ export default ({ data }) => (
           />
         </figure>
       </div>
-      <article className="content">
+    <article className="content">
         <div className="container">
           <h1 className="bar">ESSENTIALSについて</h1>
           <aside className="info">
@@ -52,6 +53,5 @@ export default ({ data }) => (
           </div>
         </div>
       </article>
-    </>
   </Layout>
 )
