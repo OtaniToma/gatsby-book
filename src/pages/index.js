@@ -61,7 +61,7 @@ export default ({ data }) => (
     </header>
     <section className="hero">
       <figure>
-        <Img fluid={data.hero.childImageSharp.fluid} alt="" />
+        <Img fluid={data.hero.childImageSharp.fluid} alt="" style={{ height: '100%'}} />
       </figure>
       <div className="catch">
         <h1>There is no love sincerer than<br /> the love of food.</h1>
