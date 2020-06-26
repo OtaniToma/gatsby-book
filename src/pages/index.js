@@ -105,7 +105,7 @@ export default ({ data }) => (
     <section className="photo">
       <h2 className="sr-only">Photo</h2>
       <figure>
-        <Img fluid={data.berry.childImageSharp.fluid} alt="" />
+        <Img fluid={data.berry.childImageSharp.fluid} alt="" style={{ height: '100%' }} />
       </figure>
     </section>
     <footer className="footer">
