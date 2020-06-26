@@ -4,7 +4,7 @@ import SEO from '../components/seo'
 
 export default () => (
   <Layout>
-    <SEO />
+    <SEO pagetitle="404 Page Not Found" />
     <h1 style={{ padding: "50vh 0", textAlign: "center" }}>404 Page Not Found</h1>
   </Layout>
 )
