@@ -9,7 +9,8 @@ module.exports = {
   siteMetadata: {
     title: `ESSENTIALS`,
     description: `おいしい食材と食事を探求するサイト`,
-    lang: `ja`
+    lang: `ja`,
+    siteUrl: `https://essentials-gatsby.netlify.app`
   },
   plugins: [
     `gatsby-transformer-sharp`,
