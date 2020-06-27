@@ -3,6 +3,7 @@ import { graqhql } from "gatsby"
 import Img from 'gatsby-image'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from "@contentful/rich-text-types"
+import useContentfulImage from '../utils/useContentfulImage'
 import Layout from '../components/layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faFolderOpen } from '@fortawesome/free-regular-svg-icons'
@@ -17,12 +18,12 @@ const options = {
       </h2>
     ),
     [BLOCKS.EMBEDDED_ASSET]: node => (
-      <img
-        src={node.data.target.fields.file["ja-JP"].url}
+      <Img
+        fluid={useContentfulImage(node.data.target.fields.file["ja-JP"].url)}
         alt={
           node.data.target.fields.description
-          ? node.data.target.fields.description["ja-JP"]
-          : node.data.target.fields.title["ja-JP"]
+            ? node.data.target.fields.description["ja-JP"]
+            : node.data.target.fields.title["ja-JP"]
         }
       />
     )
