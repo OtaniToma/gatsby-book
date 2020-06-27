@@ -86,8 +86,8 @@ export default ({ data }) => (
 )
 
 export const query = graphql`
-  query MyQuery {
-    contentfulBlogPost {
+  query($id: String!) {
+    contentfulBlogPost(id: { eq: $id }) {
       title
       publishDateJP:publishDate(formatString: "YYYY年MM月DD日")
       publishDate
