@@ -1,10 +1,33 @@
 import React from 'react'
-import { graqhql, graphql } from "gatsby"
+import { graqhql } from "gatsby"
 import Img from 'gatsby-image'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BLOCKS } from "@contentful/rich-text-types"
 import Layout from '../components/layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faFolderOpen } from '@fortawesome/free-regular-svg-icons'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+
+const options = {
+  renderNode: {
+    [BLOCKS.HEADING_2]: (node, children) => (
+      <h2>
+        <FontAwesomeIcon icon={faCheckSquare} />
+        {children}
+      </h2>
+    ),
+    [BLOCKS.EMBEDDED_ASSET]: node => (
+      <img
+        src={node.data.target.fields.file["ja-JP"].url}
+        alt={
+          node.data.target.fields.description
+          ? node.data.target.fields.description["ja-JP"]
+          : node.data.target.fields.title["ja-JP"]
+        }
+      />
+    )
+  },
+}
 
 export default ({ data }) => (
   <Layout>
@@ -20,7 +43,9 @@ export default ({ data }) => (
       <div className="container">
         <h1 className="bar">{data.contentfulBlogPost.title}</h1>
         <aside className="info">
-          <time dateTime="{data.contentfulBlogPost.publishDate}"><FontAwesomeIcon icon={faClock} />{data.contentfulBlogPost.publishDateJP}</time>
+          <time dateTime="{data.contentfulBlogPost.publishDate}">
+            <FontAwesomeIcon icon={faClock} />{data.contentfulBlogPost.publishDateJP}
+          </time>
           <div className="cat">
             <FontAwesomeIcon icon={faFolderOpen} />
             <ul>
@@ -33,11 +58,7 @@ export default ({ data }) => (
           </div>
         </aside>
         <div className="postbody">
-          <p>
-            記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-            記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-            記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-              </p>
+          {documentToReactComponents(data.contentfulBlogPost.content.json, options)}
         </div>
         <ul className="postlink">
           <li className="prev">
@@ -74,6 +95,9 @@ export const query = graphql`
           ...GatsbyContentfulFluid_withWebp
         },
         description
+      }
+      content {
+        json
       }
     }
   }
