@@ -12,8 +12,8 @@ import {
 export default ({ data, location, pageContext }) => (
   <Layout>
     <SEO
-      pagetitle="ブログ"
-      pagedesc="ESSENTIALSのブログです"
+      pagetitle={`CATEGORY: ${pageContext.catname}`}
+      pagedesc={`［${pageContext.catname}］カテゴリーの記事です`}
       pagepath={location.pathname}
     />
     <section className="content bloglist">
@@ -42,8 +42,8 @@ export default ({ data, location, pageContext }) => (
             <Link
               to={
                 pageContext.currentPage === 2
-                ? `/blog/`
-                : `/blog/${pageContext.currentPage - 1}/`
+                ? `/cat/${pageContext.catslug}/`
+                : `/cat/${pageContext.catslug}/${pageContext.currentPage - 1}/`
               }
               rel="prev"
             >
@@ -55,7 +55,7 @@ export default ({ data, location, pageContext }) => (
 
         {!pageContext.isLast && (
           <li className="next">
-            <Link to={`/blog/${pageContext.currentPage + 1}/`} rel="next">
+            <Link to={`/cat/${pageContext.catslug}/${pageContext.currentPage + 1}/`} rel="next">
               <span>次のページ</span>
               <FontAwesomeIcon icon={faChevronRight} />
             </Link>
